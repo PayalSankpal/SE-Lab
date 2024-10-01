@@ -1,0 +1,24 @@
+# Byte-compiled files
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Other Python-specific files
+*.pyo
+*.pyd
+*.pdb
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Logs and database
+*.log
+*.sqlite3
+
+# IDE-specific files
+.vscode/
+.idea/
