@@ -7,7 +7,23 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 10px;
+    margin: 0; /* Remove margin for full height */
+}
+
+/* Heading style */
+h1 {
+    text-align: center;
+    color: #5151e5;
+    margin-bottom: 20px;
+    font-weight: 900;
+    font-size: 1.8rem; /* Adjusted font size */
+    cursor: pointer; /* Change cursor to pointer for interaction */
+    transition: color 0.3s ease; /* Transition for color change */
+}
+
+/* Heading hover effect */
+h1:hover {
+    color: #3b3bbd; /* Change color on hover */
 }
 
 /* Form container */
@@ -17,28 +33,27 @@ form {
     border-radius: 12px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     width: 350px;
-    transition: transform 0.3s;
+    transform: translateY(-20px); /* Initial slide-in effect */
+    opacity: 0; /* Initially hidden */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transition */
 }
 
-/* Hover effect on the form */
-form:hover {
-    transform: scale(1.03);
+/* Active form visibility */
+form.active {
+    transform: translateY(0); /* Slide in */
+    opacity: 1; /* Fully visible */
 }
 
-/* Heading style */
-h1 {
-    text-align: center;
-    color: #5151e5;
-    margin-bottom: 20px;
-    font-weight: 900;
-}
-
+/* Label style */
 /* Label style */
 label {
     display: block;
     font-weight: bold;
-    /* margin-bottom: 5px; */
+    margin-bottom: 5px;
+    color: #555555; /* Set label color to grey */
+    transition: color 0.3s ease; /* Transition for label color */
 }
+
 
 /* Input field styles */
 input[type="text"],
@@ -46,7 +61,6 @@ input[type="email"],
 input[type="tel"] {
     width: calc(100% - 20px);  /* Full width with padding consideration */
     padding: 10px;
-    /* margin-bottom: 20px; */
     border: 1px solid #ddd;
     border-radius: 8px;
     box-sizing: border-box;
@@ -60,6 +74,11 @@ input[type="tel"]:focus {
     border: 1px solid #5151e5;
     box-shadow: 0 0 5px rgba(81, 81, 229, 0.5);
     outline: none;
+}
+
+/* Change label color on input focus */
+input:focus + label {
+    color: #5151e5; /* Change label color on input focus */
 }
 
 /* Submit button styles */
@@ -88,3 +107,7 @@ input::placeholder {
     font-style: italic;
 }
 
+/* Hide form initially */
+.hidden {
+    display: none; /* Hide form on load */
+}
