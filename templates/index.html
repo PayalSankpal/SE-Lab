@@ -14,7 +14,7 @@
 
  <!-- Toastr CSS for version 2.1.4 -->
  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"/>
- 
+
     <title>Registration Form</title>
 </head>
 <body>
@@ -40,16 +40,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
 <script>
+        
+        // Phone validation regex (for 10 digits)
+        const phonePattern = /^\d{10}$/;
+
     document.getElementById('registrationForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
+        const phone = document.getElementById('phone').value;
+
+        // Phone number validation
+        if (!phonePattern.test(phone)) {
+            toastr.error('Please enter a valid 10-digit phone number.', 'Error');
+            // return;  // Stop form submission if phone is invalid
+        }
+        else {
         const formData = {
             MIS: document.getElementById('MIS').value,
             firstName: document.getElementById('firstName').value,
             lastName: document.getElementById('lastName').value,
             email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value
+            phone: phone
         };
+
+        
 
         try {
             const response = await fetch('/register', {
@@ -67,6 +81,7 @@
         } catch (error) {
             toastr.error('Network error: ' + error, 'Error');
         }
+    }
     });
 </script>
 </body>
