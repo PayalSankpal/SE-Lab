@@ -7,8 +7,8 @@
     <title>Registration Form</title>
 </head>
 <body>
-    <h1>Student Information Form</h1>
-    <form id="registrationForm">
+    <h1 id="title">Student Information Form</h1>
+    <form id="registrationForm" class="hidden">
         <label for="MIS">MIS:</label><br>
         <input type="text" id="MIS" name="MIS" required><br><br>
 
@@ -28,6 +28,15 @@
     </form>
     
 <script>
+
+    document.getElementById('title').addEventListener('click', function() {
+        const form = document.getElementById('registrationForm');
+        form.classList.remove('hidden'); // Remove hidden class
+        setTimeout(() => {
+            form.classList.add('active'); // Add active class for sliding in
+        }, 10); // Small delay for CSS transition
+    });
+    
     document.getElementById('registrationForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
