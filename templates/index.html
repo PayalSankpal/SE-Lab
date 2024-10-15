@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Toastr JavaScript for version 2.1.4 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+ <!-- Toastr CSS for version 2.1.4 -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"/>
+
     <title>Registration Form</title>
 </head>
 <body>
@@ -26,8 +37,15 @@
 
         <button type="submit">Submit</button>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
 <script>
+
+        
+        // Phone validation regex (for 10 digits)
+    const phonePattern = /^\d{10}$/;
+
+
 
     document.getElementById('title').addEventListener('click', function() {
         const form = document.getElementById('registrationForm');
@@ -37,16 +55,27 @@
         }, 10); // Small delay for CSS transition
     });
     
+
     document.getElementById('registrationForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
+        const phone = document.getElementById('phone').value;
+
+        // Phone number validation
+        if (!phonePattern.test(phone)) {
+            toastr.error('Please enter a valid 10-digit phone number.', 'Error');
+            // return;  // Stop form submission if phone is invalid
+        }
+        else {
         const formData = {
             MIS: document.getElementById('MIS').value,
             firstName: document.getElementById('firstName').value,
             lastName: document.getElementById('lastName').value,
             email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value
+            phone: phone
         };
+
+        
 
         try {
             const response = await fetch('/register', {
@@ -56,14 +85,15 @@
             });
 
             if (response.ok) {
-                alert('Registration successful!');
+                toastr.success('Registration successful!', 'Success');
                 document.getElementById('registrationForm').reset();
             } else {
-                alert('There was an error submitting the form.');
+                toastr.error('There was an error submitting the form.', 'Error');
             }
         } catch (error) {
-            alert('Network error: ' + error);
+            toastr.error('Network error: ' + error, 'Error');
         }
+    }
     });
 </script>
 </body>
